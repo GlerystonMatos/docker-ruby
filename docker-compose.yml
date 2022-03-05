@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  myapp:
+    env_file:
+      - ./.env
+    image: rails/app
+    container_name: ${COMPOSE_PROJECT_NAME}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./${APP_NAME}:/${APP_NAME}
+    networks:
+      - rails_app_net
+
+networks:
+  rails_app_net:
+    name: rails_app_net
